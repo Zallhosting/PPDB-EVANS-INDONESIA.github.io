@@ -177,61 +177,53 @@
         }
         
         /* Partner Logos */
-        .partners {
-            padding: 50px 0;
-            background: var(--putih);
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        
-        .section-title h2 {
-            font-size: 2rem;
-            color: var(--hijau);
-            position: relative;
-            display: inline-block;
-            padding-bottom: 10px;
-        }
-        
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            width: 50%;
-            height: 3px;
-            background: var(--hijau);
-            bottom: 0;
-            left: 25%;
-        }
-        
-        .partner-logos {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-        
-        .partner-logo {
-            width: 150px;
-            height: 100px;
-            margin: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .partner-logo img {
-            max-width: 100%;
-            max-height: 100%;
-            filter: grayscale(100%);
-            transition: all 0.3s ease;
-        }
-        
-        .partner-logo img:hover {
-            filter: grayscale(0%);
-            transform: scale(1.05);
-        }
+        .partner-section {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .partner-section h3 {
+      font-size: 28px;
+      margin-bottom: 40px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .partner-section h3::after {
+      content: '';
+      position: absolute;
+      width: 50%;
+      height: 3px;
+      background: #007bff;
+      bottom: -10px;
+      left: 25%;
+    }
+
+    .partner-logos {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      margin-top: 30px;
+    }
+
+    .partner-logo {
+      width: 160px;
+      height: auto;
+      object-fit: contain;
+      filter: grayscale(100%);
+      opacity: 0.8;
+      transition: all 0.3s ease;
+    }
+
+    .partner-logo:hover {
+      filter: grayscale(0%);
+      opacity: 1;
+      transform: scale(1.05);
+    }
         
         /* Jenjang Pendidikan */
         .jenjang {
