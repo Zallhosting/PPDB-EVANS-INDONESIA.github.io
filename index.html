@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PPDB Online - Penerimaan Peserta Didik Baru</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --hijau: #2e8b57;
+            --hijau-muda: #3cb371;
+            --putih: #ffffff;
+            --abu-abu: #808080;
+            --biru: #1e90ff;
+            --merah: #ff4500;
+            --hitam: #333333;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: var(--hitam);
+            line-height: 1.6;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--hijau), var(--hijau-muda));
+            color: var(--putih);
+            padding: 1rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 60px;
+            margin-right: 15px;
+        }
+        
+        .logo-text h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .logo-text p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            color: var(--putih);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        nav ul li a:hover {
+            opacity: 0.8;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--putih);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            color: var(--putih);
+            width: 60%;
+        }
+        
+        .hero-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+        
+        .hero-content p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--hijau);
+            color: var(--putih);
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid var(--hijau);
+        }
+        
+        .btn:hover {
+            background: transparent;
+            color: var(--putih);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--putih);
+            margin-left: 15px;
+        }
+        
+        .btn-outline:hover {
+            background: var(--putih);
+            color: var(--hijau);
+        }
+        
+        /* Partner Logos */
+        .partners {
+            padding: 50px 0;
+            background: var(--putih);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .section-title h2 {
+            font-size: 2rem;
+            color: var(--hijau);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            background: var(--hijau);
+            bottom: 0;
+            left: 25%;
+        }
+        
+        .partner-logos {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .partner-logo {
+            width: 150px;
+            height: 100px;
+            margin: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .partner-logo img {
+            max-width: 100%;
+            max-height: 100%;
+            filter: grayscale(100%);
+            transition: all 0.3s ease;
+        }
+        
+        .partner-logo img:hover {
+            filter: grayscale(0%);
+            transform: scale(1.05);
+        }
+        
+        /* Jenjang Pendidikan */
+        .jenjang {
+            padding: 80px 0;
+            background: #f5f5f5;
+        }
+        
+        .jenjang-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .jenjang-card {
+            background: var(--putih);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .jenjang-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .jenjang-card.sd {
+            border-top: 5px solid var(--merah);
+        }
+        
+        .jenjang-card.smp {
+            border-top: 5px solid var(--biru);
+        }
+        
+        .jenjang-card.sma {
+            border-top: 5px solid var(--abu-abu);
+        }
+        
+        .jenjang-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .jenjang-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .jenjang-card:hover .jenjang-img img {
+            transform: scale(1.1);
+        }
+        
+        .jenjang-content {
+            padding: 25px;
+        }
+        
+        .jenjang-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--hitam);
+        }
+        
+        .jenjang-content p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        /* Persyaratan */
+        .persyaratan {
+            padding: 80px 0;
+            background: var(--putih);
+        }
+        
+        .persyaratan-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+        
+        .persyaratan-box {
+            background: #f9f9f9;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .persyaratan-box h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--hijau);
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .persyaratan-box h3::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background: var(--hijau);
+            bottom: 0;
+            left: 0;
+        }
+        
+        .persyaratan-list {
+            list-style: none;
+        }
+        
+        .persyaratan-list li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .persyaratan-list li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            top: 2px;
+            color: var(--hijau);
+        }
+        
+        /* Timeline */
+        .timeline {
+            padding: 80px 0;
+            background: #f5f5f5;
+        }
+        
+        .timeline-container {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 100%;
+            background: var(--hijau);
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 50px;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            padding-right: 50%;
+            text-align: right;
+        }
+        
+        .timeline-item:nth-child(even) {
+            padding-left: 50%;
+            text-align: left;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--putih);
+            border: 3px solid var(--hijau);
+            border-radius: 50%;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+        
+        .timeline-content {
+            background: var(--putih);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .timeline-content h4 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--hijau);
+        }
+        
+        .timeline-content p {
+            color: #666;
+        }
+        
+        /* Contact */
+        .contact {
+            padding: 80px 0;
+            background: var(--putih);
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .contact-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--hijau);
+        }
+        
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .contact-detail i {
+            width: 40px;
+            height: 40px;
+            background: var(--hijau);
+            color: var(--putih);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+        }
+        
+        .contact-form {
+            background: #f9f9f9;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .contact-form h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--hijau);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background: var(--hijau);
+            color: var(--putih);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .submit-btn:hover {
+            background: var(--hijau-muda);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--hitam);
+            color: var(--putih);
+            padding: 60px 0 20px;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-col h4 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            background: var(--hijau);
+            bottom: 0;
+            left: 0;
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-col ul li a {
+            color: #bbb;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-col ul li a:hover {
+            color: var(--putih);
+            padding-left: 5px;
+        }
+        
+        .footer-partners {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .footer-partner {
+            width: 80px;
+            height: 50px;
+            background: var(--putih);
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 5px;
+        }
+        
+        .footer-partner img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero-content {
+                width: 80%;
+            }
+            
+            .timeline-container::before {
+                left: 30px;
+            }
+            
+            .timeline-item:nth-child(odd),
+            .timeline-item:nth-child(even) {
+                padding-left: 80px;
+                padding-right: 0;
+                text-align: left;
+            }
+            
+            .timeline-dot {
+                left: 30px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+            }
+            
+            nav ul li {
+                margin-left: 15px;
+                margin-right: 15px;
+            }
+            
+            .hero-content {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .hero-btns {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn-outline {
+                margin-left: 0;
+                margin-top: 15px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .jenjang-container,
+            .persyaratan-container,
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .partner-logos {
+                flex-direction: column;
+            }
+            
+            .partner-logo {
+                margin: 10px 0;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="https://via.placeholder.com/60x60" alt="Logo Sekolah">
+                <div class="logo-text">
+                    <h1>PPDB ONLINE</h1>
+                    <p>Tahun Ajaran 2023/2024</p>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Beranda</a></li>
+                    <li><a href="#jenjang">Jenjang</a></li>
+                    <li><a href="#persyaratan">Persyaratan</a></li>
+                    <li><a href="#timeline">Timeline</a></li>
+                    <li><a href="#kontak">Kontak</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Penerimaan Peserta Didik Baru Tahun Ajaran 2023/2024</h2>
+                <p>Bergabunglah dengan komunitas belajar yang inspiratif dan penuh prestasi. Daftarkan diri Anda sekarang juga!</p>
+                <div class="hero-btns">
+                    <a href="#daftar" class="btn">Daftar Sekarang</a>
+                    <a href="#persyaratan" class="btn btn-outline">Lihat Persyaratan</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partner Logos -->
+    <section class="partners">
+        <div class="container">
+            <div class="section-title">
+                <h2>Bekerja Sama Dengan</h2>
+            </div>
+            <div class="partner-logos">
+                <div class="partner-logo">
+                    <img src="https://via.placeholder.com/150x60" alt="Partner 1">
+                </div>
+                <div class="partner-logo">
+                    <img src="https://via.placeholder.com/150x60" alt="Partner 2">
+                </div>
+                <div class="partner-logo">
+                    <img src="https://via.placeholder.com/150x60" alt="Partner 3">
+                </div>
+                <div class="partner-logo">
+                    <img src="https://via.placeholder.com/150x60" alt="Partner 4">
+                </div>
+                <div class="partner-logo">
+                    <img src="https://via.placeholder.com/150x60" alt="Partner 5">
+                </div>
+                <div class="partner-logo">
+                    <img src="https://via.placeholder.com/150x60" alt="Partner 6">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Jenjang Pendidikan -->
+    <section class="jenjang" id="jenjang">
+        <div class="container">
+            <div class="section-title">
+                <h2>Jenjang Pendidikan</h2>
+            </div>
+            <div class="jenjang-container">
+                <div class="jenjang-card sd">
+                    <div class="jenjang-img">
+                        <img src="https://images.unsplash.com/photo-1588072432836-e10032774350?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="SD">
+                    </div>
+                    <div class="jenjang-content">
+                        <h3>Sekolah Dasar (SD)</h3>
+                        <p>Pendidikan dasar untuk membangun fondasi pengetahuan dan karakter yang kuat.</p>
+                        <a href="#persyaratan" class="btn">Lihat Persyaratan</a>
+                    </div>
+                </div>
+                <div class="jenjang-card smp">
+                    <div class="jenjang-img">
+                        <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="SMP">
+                    </div>
+                    <div class="jenjang-content">
+                        <h3>Sekolah Menengah Pertama (SMP)</h3>
+                        <p>Mengembangkan potensi akademik dan non-akademik siswa secara menyeluruh.</p>
+                        <a href="#persyaratan" class="btn">Lihat Persyaratan</a>
+                    </div>
+                </div>
+                <div class="jenjang-card sma">
+                    <div class="jenjang-img">
+                        <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="SMA">
+                    </div>
+                    <div class="jenjang-content">
+                        <h3>Sekolah Menengah Atas (SMA)</h3>
+                        <p>Mempersiapkan siswa untuk pendidikan tinggi dan dunia profesional.</p>
+                        <a href="#persyaratan" class="btn">Lihat Persyaratan</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Persyaratan -->
+    <section class="persyaratan" id="persyaratan">
+        <div class="container">
+            <div class="section-title">
+                <h2>Persyaratan Pendaftaran</h2>
+            </div>
+            <div class="persyaratan-container">
+                <div class="persyaratan-box">
+                    <h3>Siswa Baru (Kelas 10)</h3>
+                    <ul class="persyaratan-list">
+                        <li>Surat Keterangan Lulus (SKL) asli</li>
+                        <li>Fotokopi Kartu Keluarga dan KTP Orang Tua</li>
+                        <li>Fotokopi Akte Kelahiran</li>
+                        <li>Putra/Putri Karyawan/Staff (dibuktikan dengan Surat Rekomendasi)</li>
+                        <li>Surat Rekomendasi dari Estate/Mill Bulking masing-masing</li>
+                    </ul>
+                </div>
+                <div class="persyaratan-box">
+                    <h3>Siswa Pindahan</h3>
+                    <ul class="persyaratan-list">
+                        <li>Surat Keterangan Lulus (SKL) asli</li>
+                        <li>Fotokopi Kartu Keluarga dan KTP Orang Tua</li>
+                        <li>Fotokopi Akte Kelahiran</li>
+                        <li>Putra/Putri Karyawan/Staff (dibuktikan dengan Surat Rekomendasi)</li>
+                        <li>Surat Rekomendasi dari Estate/Mill Bulking masing-masing</li>
+                        <li>Membawa Surat Pindah Sekolah dari Sekolah Asal</li>
+                    </ul>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 40px;">
+                <img src="https://via.placeholder.com/800x400" alt="Ilustrasi PPDB" style="max-width: 100%; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline -->
+    <section class="timeline" id="timeline">
+        <div class="container">
+            <div class="section-title">
+                <h2>Timeline Pendaftaran</h2>
+            </div>
+            <div class="timeline-container">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h4>Pendaftaran Gelombang 1</h4>
+                        <p>1 - 15 Juni 2023</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h4>Pengumuman Hasil Gelombang 1</h4>
+                        <p>20 Juni 2023</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h4>Daftar Ulang Gelombang 1</h4>
+                        <p>21 - 25 Juni 2023</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h4>Pendaftaran Gelombang 2</h4>
+                        <p>1 - 15 Juli 2023</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h4>Pengumuman Hasil Gelombang 2</h4>
+                        <p>20 Juli 2023</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h4>Daftar Ulang Gelombang 2</h4>
+                        <p>21 - 25 Juli 2023</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact" id="kontak">
+        <div class="container">
+            <div class="section-title">
+                <h2>Hubungi Kami</h2>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Informasi Kontak</h3>
+                    <div class="contact-detail">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Alamat</h4>
+                            <p>Jl. Pendidikan No. 123, Kota Pendidikan, Jawa Barat</p>
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <i class="fas fa-phone-alt"></i>
+                        <div>
+                            <h4>Telepon</h4>
+                            <p>(021) 12345678</p>
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p>info@ppdb-sekolah.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <i class="fab fa-whatsapp"></i>
+                        <div>
+                            <h4>WhatsApp</h4>
+                            <p>+62 812 3456 7890</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>Formulir Pertanyaan</h3>
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Nama Lengkap</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Nomor Telepon</label>
+                            <input type="tel" id="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subjek</label>
+                            <select id="subject">
+                                <option value="ppdb">Informasi PPDB</option>
+                                <option value="persyaratan">Persyaratan</option>
+                                <option value="lainnya">Lainnya</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Pesan</label>
+                            <textarea id="message" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Kirim Pesan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h4>Tentang Kami</h4>
+                    <p>PPDB Online adalah sistem penerimaan peserta didik baru berbasis web yang memudahkan calon siswa untuk mendaftar ke sekolah kami.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Link Cepat</h4>
+                    <ul>
+                        <li><a href="#home">Beranda</a></li>
+                        <li><a href="#jenjang">Jenjang Pendidikan</a></li>
+                        <li><a href="#persyaratan">Persyaratan</a></li>
+                        <li><a href="#timeline">Timeline</a></li>
+                        <li><a href="#kontak">Kontak</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Jam Operasional</h4>
+                    <ul>
+                        <li>Senin - Jumat: 08.00 - 16.00</li>
+                        <li>Sabtu: 08.00 - 12.00</li>
+                        <li>Minggu & Hari Libur: Tutup</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Mitra Kerjasama</h4>
+                    <div class="footer-partners">
+                        <div class="footer-partner">
+                            <img src="https://via.placeholder.com/70x30" alt="Mitra 1">
+                        </div>
+                        <div class="footer-partner">
+                            <img src="https://via.placeholder.com/70x30" alt="Mitra 2">
+                        </div>
+                        <div class="footer-partner">
+                            <img src="https://via.placeholder.com/70x30" alt="Mitra 3">
+                        </div>
+                        <div class="footer-partner">
+                            <img src="https://via.placeholder.com/70x30" alt="Mitra 4">
+                        </div>
+                        <div class="footer-partner">
+                            <img src="https://via.placeholder.com/70x30" alt="Mitra 5">
+                        </div>
+                        <div class="footer-partner">
+                            <img src="https://via.placeholder.com/70x30" alt="Mitra 6">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 PPDB Online. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Form submission handling
+        const form = document.querySelector('form');
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Terima kasih! Pesan Anda telah terkirim. Kami akan segera menghubungi Anda.');
+                this.reset();
+            });
+        }
+        
+        // Animation on scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.jenjang-card, .persyaratan-box, .timeline-item');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            elements.forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(20px)';
+                element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(element);
+            });
+        };
+        
+        window.addEventListener('load', animateOnScroll);
+    </script>
+</body>
+</html>
