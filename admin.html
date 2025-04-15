@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin PPDB - Manajemen Persyaratan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --hijau: #2e8b57;
+            --hijau-muda: #3cb371;
+            --putih: #ffffff;
+            --abu-abu: #808080;
+            --biru: #1e90ff;
+            --merah: #ff4500;
+            --hitam: #333333;
+            --sidebar: #2c3e50;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            display: flex;
+            background-color: #f5f7fa;
+            color: var(--hitam);
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background: var(--sidebar);
+            color: var(--putih);
+            height: 100vh;
+            position: fixed;
+            padding: 20px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .sidebar-header {
+            padding: 0 20px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .sidebar-header h3 {
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .sidebar-header h3 i {
+            margin-right: 10px;
+            color: var(--hijau);
+        }
+        
+        .sidebar-menu {
+            padding: 20px 0;
+        }
+        
+        .sidebar-menu ul {
+            list-style: none;
+        }
+        
+        .sidebar-menu li {
+            position: relative;
+        }
+        
+        .sidebar-menu li a {
+            display: block;
+            padding: 12px 20px;
+            color: #bbb;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+        
+        .sidebar-menu li a:hover,
+        .sidebar-menu li a.active {
+            color: var(--putih);
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .sidebar-menu li a i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .sidebar-menu li a.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: var(--hijau);
+        }
+        
+        /* Main Content */
+        .main-content {
+            width: calc(100% - 280px);
+            margin-left: 280px;
+            padding: 20px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: var(--putih);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .header h2 {
+            font-size: 1.5rem;
+            color: var(--hitam);
+        }
+        
+        .user-menu {
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-menu img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        .user-info {
+            text-align: right;
+        }
+        
+        .user-info h4 {
+            font-size: 0.9rem;
+            margin-bottom: 3px;
+        }
+        
+        .user-info p {
+            font-size: 0.8rem;
+            color: #777;
+        }
+        
+        /* Content */
+        .content {
+            background: var(--putih);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card {
+            background: var(--putih);
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+        
+        .card-header {
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .card-header h3 {
+            font-size: 1.2rem;
+            color: var(--hitam);
+        }
+        
+        .card-header .btn {
+            background: var(--hijau);
+            color: var(--putih);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .card-header .btn:hover {
+            background: var(--hijau-muda);
+        }
+        
+        .card-body {
+            padding: 20px;
+        }
+        
+        /* Form */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--hitam);
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--hijau);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(46, 139, 87, 0.2);
+        }
+        
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .submit-btn {
+            background: var(--hijau);
+            color: var(--putih);
+            border: none;
+            padding: 10px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .submit-btn:hover {
+            background: var(--hijau-muda);
+        }
+        
+        /* Table */
+        .table-responsive {
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        table th,
+        table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        table th {
+            background: #f9f9f9;
+            font-weight: 600;
+            color: var(--hitam);
+        }
+        
+        table tr:hover {
+            background: #f5f5f5;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .badge-primary {
+            background: rgba(30, 144, 255, 0.1);
+            color: var(--biru);
+        }
+        
+        .badge-success {
+            background: rgba(46, 139, 87, 0.1);
+            color: var(--hijau);
+        }
+        
+        .badge-warning {
+            background: rgba(255, 165, 0, 0.1);
+            color: orange;
+        }
+        
+        .action-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 5px;
+            color: var(--putih);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .action-btn.edit {
+            background: var(--biru);
+            margin-right: 5px;
+        }
+        
+        .action-btn.delete {
+            background: #ff4500;
+        }
+        
+        .action-btn:hover {
+            opacity: 0.8;
+        }
+        
+        /* Jenjang Tabs */
+        .jenjang-tabs {
+            display: flex;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 20px;
+        }
+        
+        .jenjang-tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            font-weight: 500;
+            color: #777;
+            position: relative;
+        }
+        
+        .jenjang-tab.active {
+            color: var(--hijau);
+        }
+        
+        .jenjang-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--hijau);
+        }
+        
+        .jenjang-tab.sd.active {
+            color: var(--merah);
+        }
+        
+        .jenjang-tab.sd.active::after {
+            background: var(--merah);
+        }
+        
+        .jenjang-tab.smp.active {
+            color: var(--biru);
+        }
+        
+        .jenjang-tab.smp.active::after {
+            background: var(--biru);
+        }
+        
+        .jenjang-tab.sma.active {
+            color: var(--abu-abu);
+        }
+        
+        .jenjang-tab.sma.active::after {
+            background: var(--abu-abu);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .sidebar {
+                width: 250px;
+            }
+            
+            .main-content {
+                width: calc(100% - 250px);
+                margin-left: 250px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 0;
+                overflow: hidden;
+            }
+            
+            .main-content {
+                width: 100%;
+                margin-left: 0;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h3><i class="fas fa-school"></i> Admin PPDB</h3>
+        </div>
+        <div class="sidebar-menu">
+            <ul>
+                <li><a href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="#" class="active"><i class="fas fa-file-alt"></i> Persyaratan</a></li>
+                <li><a href="#"><i class="fas fa-users"></i> Pendaftar</a></li>
+                <li><a href="#"><i class="fas fa-calendar-alt"></i> Timeline</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> Pengaturan</a></li>
+                <li><a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="header">
+            <h2><i class="fas fa-file-alt"></i> Manajemen Persyaratan PPDB</h2>
+            <div class="user-menu">
+                <img src="https://via.placeholder.com/40x40" alt="User">
+                <div class="user-info">
+                    <h4>Admin PPDB</h4>
+                    <p>Super Admin</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="jenjang-tabs">
+                <div class="jenjang-tab sd active" data-tab="sd">SD</div>
+                <div class="jenjang-tab smp" data-tab="smp">SMP</div>
+                <div class="jenjang-tab sma" data-tab="sma">SMA</div>
+            </div>
+
+            <!-- SD Content -->
+            <div id="sd" class="tab-content active">
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-user-graduate"></i> Persyaratan Siswa Baru SD</h3>
+                        <button class="btn"><i class="fas fa-plus"></i> Tambah Syarat</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Persyaratan</th>
+                                        <th>Status</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Surat Keterangan Lulus (SKL) asli</td>
+                                        <td><span class="badge badge-success">Aktif</span></td>
+                                        <td>
+                                            <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                                            <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Fotokopi Kartu Keluarga dan KTP Orang Tua</td>
+                                        <td><span class="badge badge-success">Aktif</span></td>
+                                        <td>
+                                            <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                                            <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Fotokopi Akte Kelahiran</td>
+                                        <td><span class="badge badge-success">Aktif</span></td>
+                                        <td>
+                                            <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                                            <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>Putra/Putri Karyawan/Staff (dibuktikan dengan Surat Rekomendasi)</td>
+                                        <td><span class="badge badge-success">Aktif</span></td>
+                                        <td>
+                                            <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                                            <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>Surat Rekomendasi dari Estate/Mill Bulking masing-masing</td>
+                                        <td><span class="badge badge-success">Aktif</span></td>
+                                        <td>
+                                            <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                                            <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-exchange-alt"></i> Persyaratan Siswa Pindahan SD</h3>
+                        <button class="btn"><i class="fas fa-plus"></i> Tambah Syarat</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Persyaratan</th>
+                                        <th>Status</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Surat Keterangan Lulus (SKL) asli</td>
+                                        <td><span class="badge badge-success">Aktif</span></td>
+                                        <td>
+                                            <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                                            <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Fotokopi Kartu Keluarga dan KTP Orang Tua</td>
+                                        <td><span class="badge badge-success">Aktif</span></td>
+                                        <td>
+                                            <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                                            <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Fotokopi Akte Kelahiran</td>
+                                        <td><span class="badge badge-success">Aktif</span></td>
+                                        <td>
+                                            <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                                            <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>Putra/Putri Karyawan/Staff (dibuktikan dengan Surat Rekomendasi)</td>
+                                        <td><span class="badge badge-success">Aktif</span></td>
+                                        <td>
+                                            <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                                            <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>Surat Rekomendasi dari Estate/Mill Bulking masing-masing</td>
+                                        <td><span class="badge badge-success">Aktif</span></td>
+                                        <td>
+                                            <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                                            <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>6</td>
+                                        <td>Membawa Surat Pindah Sekolah dari Sekolah Asal</td>
+                                        <td><span class="badge badge-success">Aktif</span></td>
+                                        <td>
+                                            <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                                            <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SMP Content -->
+            <div id="smp" class="tab-content">
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-user-graduate"></i> Persyaratan Siswa Baru SMP</h3>
+                        <button class="btn"><i class="fas fa-plus"></i> Tambah Syarat</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Persyaratan</th>
+                                        <th>Status</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Surat Keterangan Lulus (SKL) asli</td>
+                                        <td><span class="badge badge-success">Aktif</span></td>
+                                        <td>
+                                            <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                                            <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Fotokopi Kartu Keluarga dan KTP Orang Tua</td>
+                                        <td><span class="badge badge-success">Aktif</span></td>
+                                        <td>
+                                            <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                                            <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Fotokopi Akte Kelahiran</td>
+                                        <td><span class="badge badge-success">Aktif</span></td>
+                                        <td>
+                                            <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                                            <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>Putra/Putri Karyawan/Staff (dibuktikan dengan Surat Rekomendasi)</td>
+                                        <td><span class="badge badge-success">Aktif</span></td>
+                                        <td>
+                                            <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                                            <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>Surat Rekomendasi dari Estate/Mill Bulking masing-masing</td>
+                                        <td><span class="badge badge-success">Aktif</span></td>
+                                        <td>
+                                            <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                                            <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-exchange-alt"></i> Persyaratan Siswa Pindahan SMP</h3>
+                        <button class="btn"><i class="fas fa-plus"></i> Tambah Syarat</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Persyaratan</th>
+                                        <th>Status</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Surat Keterangan Lulus (SKL) asli</td>
+                                        <td><span class="badge badge-success">Aktif</span></td>
+                                        <td>
+                                            <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                                            <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Fotokopi Kartu Keluarga dan KTP Orang Tua</td>
+                                        <td><span class="badge badge-success">Aktif</span></td>
+                                        <td>
+                                            <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                                            <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Fotokopi Akte Kelahiran</td>
+                                        <td><span class="badge badge-success">Aktif</span></td>
+                                        <td>
+                                            <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                                            <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>Putra/Putri Karyawan/Staff (dibuktikan dengan Surat Rekomendasi)</td>
+                                        <td><span class="badge badge-success">Aktif</span></td>
+                                        <td>
+                                            <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                                            <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>Surat Rekomendasi dari Estate/Mill Bulking masing-masing</td>
+                                        <td><span class="badge badge-success">Aktif</span></td>
+                                        <td>
+                                            <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                                            <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>6</td>
+                                        <td>Membawa Surat Pindah Sekolah dari Sekolah Asal</td>
+                                        <td><span class="badge badge-success">Aktif</span></td>
+                                        <td>
+                                            <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                                            <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SMA Content -->
+            <div id="sma" class="tab-content">
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-user-graduate"></i> Persyaratan Siswa Baru SMA</h3>
+                        <button class="btn"><i class="fas fa-plus"></i> Tambah Syarat</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Persyaratan</th>
+                                        <th>Status</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Surat Keterangan Lulus (SKL) asli</td>
+                                        <td><span class="badge badge-success">Aktif</span></td>
+                                        <td>
+                                            <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                                            <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Fotokopi Kartu Keluarga dan KTP Orang Tua</td>
+                                        <td><span class="badge badge-success">Aktif</span></td>
+                                        <td>
+                                            <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                                            <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Fotokopi Akte Kelahiran</td>
+                                        <td><span class="badge badge-success">Aktif</span></td>
+                                        <td>
+                                            <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                                            <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>Putra/Putri Karyawan/Staff (dibuktikan dengan Surat Rekomendasi)</td>
+                                        <td><span class="badge badge-success">Aktif</span></td>
+                                        <td>
+                                            <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                                            <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>Surat Rekomendasi dari Estate/Mill Bulking masing-masing</td>
+                                        <td><span class="badge badge-success">Aktif</span></td>
+                                        <td>
+                                            <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                                            <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-exchange-alt"></i> Persyaratan Siswa Pindahan SMA</h3>
+                        <button class="btn"><i class="fas fa-plus"></i> Tambah Syarat</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Persyaratan</th>
+                                        <th>Status</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Surat Keterangan Lulus (SKL) asli</td>
+                                        <td><span class="badge badge-success">Aktif</span></td>
+                                        <td>
+                                            <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                                            <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Fotokopi Kartu Keluarga dan KTP Orang Tua</td>
+                                        <td><span class="badge badge-success">Aktif</span></td>
+                                        <td>
+                                            <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                                            <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Fotokopi Akte Kelahiran</td>
+                                        <td><span class="badge badge-success">Aktif</span></td>
+                                        <td>
+                                            <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                                            <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>Putra/Putri Karyawan/Staff (dibuktikan dengan Surat Rekomendasi)</td>
+                                        <td><span class="badge badge-success">Aktif</span></td>
+                                        <td>
+                                            <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                                            <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>Surat Rekomendasi dari Estate/Mill Bulking masing-masing</td>
+                                        <td><span class="badge badge-success">Aktif</span></td>
+                                        <td>
+                                            <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                                            <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>6</td>
+                                        <td>Membawa Surat Pindah Sekolah dari Sekolah Asal</td>
+                                        <td><span class="badge badge-success">Aktif</span></td>
+                                        <td>
+                                            <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                                            <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add Requirement Modal -->
+            <div class="card" style="margin-top: 30px;">
+                <div class="card-header">
+                    <h3><i class="fas fa-plus-circle"></i> Tambah Persyaratan Baru</h3>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="jenjang">Jenjang Pendidikan</label>
+                                <select id="jenjang">
+                                    <option value="sd">SD</option>
+                                    <option value="smp">SMP</option>
+                                    <option value="sma">SMA</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="kategori">Kategori Siswa</label>
+                                <select id="kategori">
+                                    <option value="baru">Siswa Baru</option>
+                                    <option value="pindahan">Siswa Pindahan</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="persyaratan">Persyaratan</label>
+                            <textarea id="persyaratan" placeholder="Masukkan persyaratan baru"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="status">Status</label>
+                            <select id="status">
+                                <option value="aktif">Aktif</option>
+                                <option value="nonaktif">Nonaktif</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="submit-btn"><i class="fas fa-save"></i> Simpan Persyaratan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab functionality
+        const tabs = document.querySelectorAll('.jenjang-tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and contents
+                tabs.forEach(t => t.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked tab and corresponding content
+                tab.classList.add('active');
+                const tabId = tab.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+        
+        // Edit button functionality
+        const editButtons = document.querySelectorAll('.action-btn.edit');
+        editButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                alert('Fitur edit akan membuka form pengeditan persyaratan');
+                // In real implementation, this would open a modal or form to edit the requirement
+            });
+        });
+        
+        // Delete button functionality
+        const deleteButtons = document.querySelectorAll('.action-btn.delete');
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                if (confirm('Apakah Anda yakin ingin menghapus persyaratan ini?')) {
+                    // In real implementation, this would send a request to delete the requirement
+                    alert('Persyaratan berhasil dihapus');
+                }
+            });
+        });
+        
+        // Form submission
+        const form = document.querySelector('form');
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Persyaratan baru berhasil ditambahkan!');
+                this.reset();
+            });
+        }
+    </script>
+</body>
+</html>
