@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PPDB Online - Penerimaan Peserta Didik Baru</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://uccareer.id/assets/upload/company/thumbs/thumb300px-20201223-143624-27387.png" rel="stylesheet">
+    <link rel="stylesheet" href="https://1.bp.blogspot.com/-7PmLH9Ns2JY/XEXOu1r2TNI/AAAAAAAACVo/JzoVwQuDAMAXop-2UZJId2pprc2UW33hwCK4BGAYYCw/s1600/Lowongan%2BKerja%2BPT%2BEvans%2BIndonesia%2B%2B2019.png">
     <style>
         :root {
             --hijau: #2e8b57;
@@ -176,54 +176,73 @@
             color: var(--hijau);
         }
         
-        /* Partner Logos */
-        .partner-section {
-      max-width: 1200px;
-      margin: 40px auto;
-      padding: 20px;
-      text-align: center;
-    }
-
-    .partner-section h3 {
-      font-size: 28px;
-      margin-bottom: 40px;
-      position: relative;
-      display: inline-block;
-    }
-
-    .partner-section h3::after {
-      content: '';
-      position: absolute;
-      width: 50%;
-      height: 3px;
-      background: #007bff;
-      bottom: -10px;
-      left: 25%;
-    }
-
-    .partner-logos {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      gap: 40px;
-      margin-top: 30px;
-    }
-
-    .partner-logo {
-      width: 160px;
-      height: auto;
-      object-fit: contain;
-      filter: grayscale(100%);
-      opacity: 0.8;
-      transition: all 0.3s ease;
-    }
-
-    .partner-logo:hover {
-      filter: grayscale(0%);
-      opacity: 1;
-      transform: scale(1.05);
-    }
+        /* Partner Logos - REVISI */
+        .partners {
+            padding: 50px 0;
+            background: var(--putih);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .section-title h2 {
+            font-size: 2rem;
+            color: var(--hijau);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            background: var(--hijau);
+            bottom: 0;
+            left: 25%;
+        }
+        
+        .partner-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            padding: 20px;
+        }
+        
+        .partner-logo {
+            width: 180px; /* Ukuran tetap */
+            height: 100px; /* Ukuran tetap */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f5f5f5;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .partner-logo:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .partner-logo img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            filter: grayscale(100%);
+            transition: all 0.3s ease;
+        }
+        
+        .partner-logo:hover img {
+            filter: grayscale(0%);
+        }
         
         /* Jenjang Pendidikan */
         .jenjang {
@@ -459,6 +478,16 @@
             margin-right: 15px;
         }
         
+        .contact-detail div h4 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+        
+        .contact-detail div p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
         .contact-form {
             background: #f9f9f9;
             padding: 30px;
@@ -562,6 +591,7 @@
             padding-left: 5px;
         }
         
+        /* Footer Partners - REVISI */
         .footer-partners {
             display: flex;
             flex-wrap: wrap;
@@ -570,19 +600,20 @@
         }
         
         .footer-partner {
-            width: 80px;
-            height: 50px;
+            width: 100px; /* Ukuran tetap */
+            height: 60px; /* Ukuran tetap */
             background: var(--putih);
             border-radius: 5px;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 5px;
+            padding: 10px;
         }
         
         .footer-partner img {
             max-width: 100%;
             max-height: 100%;
+            object-fit: contain;
         }
         
         .footer-bottom {
@@ -610,6 +641,12 @@
             
             .timeline-dot {
                 left: 30px;
+            }
+            
+            /* Partner Logos Responsive */
+            .partner-logo {
+                width: 150px;
+                height: 80px;
             }
         }
         
@@ -642,6 +679,23 @@
                 margin-left: 0;
                 margin-top: 15px;
             }
+            
+            /* Partner Logos Responsive */
+            .partner-logos {
+                gap: 15px;
+            }
+            
+            .partner-logo {
+                width: 130px;
+                height: 70px;
+                padding: 10px;
+            }
+            
+            /* Footer Partners Responsive */
+            .footer-partner {
+                width: 80px;
+                height: 50px;
+            }
         }
         
         @media (max-width: 576px) {
@@ -651,16 +705,25 @@
                 grid-template-columns: 1fr;
             }
             
+            /* Partner Logos Responsive */
             .partner-logos {
-                flex-direction: column;
+                flex-direction: row;
+                justify-content: center;
             }
             
             .partner-logo {
-                margin: 10px 0;
+                width: 120px;
+                height: 60px;
             }
             
-            .footer-container {
-                grid-template-columns: 1fr;
+            /* Footer Partners Responsive */
+            .footer-partners {
+                justify-content: center;
+            }
+            
+            .footer-partner {
+                width: 70px;
+                height: 40px;
             }
         }
     </style>
@@ -702,29 +765,30 @@
         </div>
     </section>
 
-    <!-- Partner Logos -->
+    <!-- Partner Logos - REVISI -->
     <section class="partners">
         <div class="container">
             <div class="section-title">
                 <h2>Bekerja Sama Dengan</h2>
             </div>
             <div class="partner-logos">
-                <div class="kab.kutai">
-                    <img src="https://pemajuankebudayaan.id/wp-content/uploads/2022/05/Lambang_Kab._Kutai_Kertanegara-240x300.png" alt="Kab.kutai">
+                <div class="partner-logo">
+                    <img src="https://via.placeholder.com/180x100" alt="Partner 1">
                 </div>
-                <div class=kemendikbud">
-                    <img src="https://2.bp.blogspot.com/-sqiAfuxCdqU/UN5bJ3CiecI/AAAAAAAABIA/Zvv5CKfu0TA/s1600/Logo+Tut+Wuri+Handayani.png" alt="kemendikbud">
+                <div class="partner-logo">
+                    <img src="https://via.placeholder.com/180x100" alt="Partner 2">
                 </div>
-                <div class="evans">
-                    <img src="https://disdik.munabarat.go.id/wp-content/uploads/2023/02/logo-kurikulum-merdeka-1536x561.png" alt="evans">
+                <div class="partner-logo">
+                    <img src="https://via.placeholder.com/180x100" alt="Partner 3">
                 </div>
-                <div class="kurikulum">
-                    <img src="https://merdekabelajar.kemdikbud.go.id/images/merdeka_belajar_logo_small.png" alt="kurikulum">
+                <div class="partner-logo">
+                    <img src="https://via.placeholder.com/180x100" alt="Partner 4">
                 </div>
-                <div class="merdeka belajar">
-                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgfVLQ6-fBL-X9zd37TL0LwIKj5imXdthTUh6OgGVjKxyBZ4hmZJB9Gu6X8504hDOTX1LJWEXZG3Ct5JikYObACSFaozPxrliOHEMFUojvOX_igLKReQxSklEelfWYYY8oYna31VSf62clZt_OvqRN5Lc9BFl9g69K8_R0ICkuObzexHGmN5eBtaUhr/s16000/Merdeka%20Mengajar.png" alt="merdeka belajar">
+                <div class="partner-logo">
+                    <img src="https://via.placeholder.com/180x100" alt="Partner 5">
                 </div>
-            
+                <div class="partner-logo">
+                    <img src="https://via.placeholder.com/180x100" alt="Partner 6">
                 </div>
             </div>
         </div>
@@ -739,7 +803,7 @@
             <div class="jenjang-container">
                 <div class="jenjang-card sd">
                     <div class="jenjang-img">
-                        <img src="https://cdn-sekolah.annibuku.com/69952980/1.jpg" alt="SD">
+                        <img src="https://images.unsplash.com/photo-1588072432836-e10032774350?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="SD">
                     </div>
                     <div class="jenjang-content">
                         <h3>Sekolah Dasar (SD)</h3>
@@ -749,7 +813,7 @@
                 </div>
                 <div class="jenjang-card smp">
                     <div class="jenjang-img">
-                        <img src="https://i.ytimg.com/vi/S8wIIXnHW-s/maxresdefault.jpg?sqp=-oaymwEmCIAKENAF8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGHIgSCg0MA8=&rs=AOn4CLCp8J4jkx003OWP0Vm47L8v7RwzlA" alt="SMP">
+                        <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="SMP">
                     </div>
                     <div class="jenjang-content">
                         <h3>Sekolah Menengah Pertama (SMP)</h3>
@@ -759,7 +823,7 @@
                 </div>
                 <div class="jenjang-card sma">
                     <div class="jenjang-img">
-                        <img src="https://www.instagram.com/p/DHNlMhry65C/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" alt="SMA">
+                        <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="SMA">
                     </div>
                     <div class="jenjang-content">
                         <h3>Sekolah Menengah Atas (SMA)</h3>
@@ -937,7 +1001,7 @@
             <div class="footer-container">
                 <div class="footer-col">
                     <h4>Tentang Kami</h4>
-                    <p>PPDB Online adalah sistem penerimaan peserta didik baru berbasis web yang memudahkan calon siswa untuk mendaftar ke sekolah kami.</p>
+                    <p>PPDB Online adalah sistem penerimaan peserta didik baru berbasis web yang memudahkan calon siswa untuk mendaftar ke sekolah EVANS INDONEDSIA.</p>
                 </div>
                 <div class="footer-col">
                     <h4>Link Cepat</h4>
@@ -947,6 +1011,7 @@
                         <li><a href="#persyaratan">Persyaratan</a></li>
                         <li><a href="#timeline">Timeline</a></li>
                         <li><a href="#kontak">Kontak</a></li>
+                        <li><a href="admin.html">manajemen admin</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
@@ -961,28 +1026,25 @@
                     <h4>Mitra Kerjasama</h4>
                     <div class="footer-partners">
                         <div class="footer-partner">
-                            <img src="https://via.placeholder.com/70x30" alt="Mitra 1">
+                            <img src="https://i.pinimg.com/originals/ad/22/2c/ad222cef0de645a53090e2f7d8e98b40.png" alt="Mitra 1">
                         </div>
                         <div class="footer-partner">
-                            <img src="https://via.placeholder.com/70x30" alt="Mitra 2">
+                            <img src="https://i1.wp.com/ikj.ac.id/wp-content/uploads/2019/12/kemendikbud-logo-png-7.png" alt="Mitra 2">
                         </div>
                         <div class="footer-partner">
-                            <img src="https://via.placeholder.com/70x30" alt="Mitra 3">
+                            <img src="https://vectorseek.com/wp-content/uploads/2023/07/Merdeka-Belajar-Logo-Png-Vector.svg-.png" alt="Mitra 3">
                         </div>
                         <div class="footer-partner">
-                            <img src="https://via.placeholder.com/70x30" alt="Mitra 4">
+                            <img src="https://www.disnakerja.com/wp-content/uploads/2021/09/Evans-Indonesia.jpg" alt="Mitra 4">
                         </div>
                         <div class="footer-partner">
-                            <img src="https://via.placeholder.com/70x30" alt="Mitra 5">
-                        </div>
-                        <div class="footer-partner">
-                            <img src="https://via.placeholder.com/70x30" alt="Mitra 6">
+                            <img src="https://sdbaitulmakmursby.sch.id/wp-content/uploads/2023/02/logo-Merdeka-mengajar.png" alt="Mitra 5">
                         </div>
                     </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2023 PPDB Online. All Rights Reserved.</p>
+                <p>&copy; 2025 PPDB EVANS INDONESIA. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
